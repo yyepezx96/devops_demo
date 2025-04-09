@@ -1,4 +1,4 @@
-name: My Custom CI/CD Pipeline  # Change the name of the workflow
+name: My Custom CI/CD Pipeline
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  test:   
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +23,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-        
+          
+      - name: Install pytest
+        run: |
+          python -m pip install pytest
+          
       - name: Run tests with Pytest
         run: pytest
 
@@ -47,4 +51,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: yarlina/devops_demo:latest
+          tags: yarlina/devops_demo:latest  # Ensure this is correct for your Docker Hub image
+
